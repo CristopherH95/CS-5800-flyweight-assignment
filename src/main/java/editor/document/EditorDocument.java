@@ -44,6 +44,7 @@ public class EditorDocument implements Document {
 
         for (TextSpan textSpan : this) {
             stringBuilder.append(textSpan.toString());
+            stringBuilder.append(";");
         }
 
         return stringBuilder.toString();

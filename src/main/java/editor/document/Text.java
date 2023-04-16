@@ -6,6 +6,7 @@ import editor.interfaces.TextSpan;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class Text implements TextSpan {
     private String characters;
@@ -14,6 +15,11 @@ public class Text implements TextSpan {
     public Text() {
         characters = "";
         metaDataSet = new HashSet<>();
+    }
+
+    public Text(String characters, SerializableMetaData... metaData) {
+        this.characters = characters;
+        this.metaDataSet = new HashSet<>(List.of(metaData));
     }
 
     @Override

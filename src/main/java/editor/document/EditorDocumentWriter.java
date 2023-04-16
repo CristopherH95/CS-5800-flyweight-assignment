@@ -19,6 +19,8 @@ public class EditorDocumentWriter implements DocumentWriter {
         for (TextSpan textSpan : document) {
             writeTextSpan(textSpan, fileWriter);
         }
+
+        commitFileContent(fileWriter);
     }
 
     private FileWriter getFileWriter(File file) throws DocumentWriteException {
@@ -35,6 +37,14 @@ public class EditorDocumentWriter implements DocumentWriter {
             fileWriter.write(System.lineSeparator());
         } catch(IOException e) {
             throw new DocumentWriteException("Failed to write to file", e);
+        }
+    }
+
+    private void commitFileContent(FileWriter fileWriter) throws DocumentWriteException {
+        try {
+            fileWriter.flush();
+        } catch(IOException e) {
+            throw new DocumentWriteException("Failed to commit file write operations", e);
         }
     }
 }
