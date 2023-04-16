@@ -6,13 +6,9 @@ import editor.metadata.FontColor;
 import java.util.HashMap;
 
 public class FontColorFactory {
-    private final HashMap<Color, FontColor> colorMap;
+    private static final HashMap<Color, FontColor> colorMap = new HashMap<>();
 
-    public FontColorFactory() {
-        colorMap = new HashMap<>();
-    }
-
-    public FontColor getFontColor(Color color) {
+    public static FontColor getFontColor(Color color) {
         if (!colorMap.containsKey(color)) {
             colorMap.put(color, new FontColor(color));
         }

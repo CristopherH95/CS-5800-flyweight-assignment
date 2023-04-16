@@ -16,7 +16,7 @@ public class Font extends MetaData {
     }
 
     @Override
-    public String serialize() {
+    public String serializeValue() {
         return fontType.toString();
     }
 }

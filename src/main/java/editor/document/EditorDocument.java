@@ -37,4 +37,15 @@ public class EditorDocument implements Document {
     public Iterator<TextSpan> iterator() {
         return textSpans.iterator();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (TextSpan textSpan : this) {
+            stringBuilder.append(textSpan.toString());
+        }
+
+        return stringBuilder.toString();
+    }
 }

@@ -1,6 +1,6 @@
 package editor.interfaces;
 
-import editor.document.DocumentParseException;
+import editor.exceptions.DocumentParseException;
 
 import java.io.File;
 

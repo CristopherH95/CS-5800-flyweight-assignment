@@ -1,19 +1,18 @@
 package editor.document;
 
+import editor.exceptions.DocumentParseException;
+import editor.exceptions.TextParseException;
 import editor.interfaces.Document;
 import editor.interfaces.DocumentLoader;
-import editor.interfaces.SerializableMetaData;
 import editor.interfaces.TextSpan;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EditorDocumentLoader implements DocumentLoader {
-    private final String unsetSymbol = "?";
+    private final TextDeserializer deserializer = new TextDeserializer();
 
     @Override
     public Document load(File file) throws DocumentParseException {
@@ -49,27 +48,10 @@ public class EditorDocumentLoader implements DocumentLoader {
     }
 
     private TextSpan parseTextSpan(String rawTextData) throws DocumentParseException {
-        String[] textParts = getTextParts(rawTextData);
-        int charactersIndex = 0;
-        int metadataIndex = 1;
-        String text = URLDecoder.decode(textParts[charactersIndex], StandardCharsets.UTF_8);
-        ArrayList<SerializableMetaData> metaData = decodeMetaData(textParts[metadataIndex]);
-        return generateTextSpan(text, metaData);
-    }
-
-    private String[] getTextParts(String rawTextData) throws DocumentParseException {
-        String[] textParts = rawTextData.split(":");
-        if (textParts.length < 2) {
-            throw new DocumentParseException(String.format("Data too short: '%s'", rawTextData));
+        try {
+            return deserializer.deserialize(rawTextData);
+        } catch(TextParseException e) {
+            throw new DocumentParseException(String.format("Failed to parse text data: '%s'", rawTextData), e);
         }
-        return textParts;
-    }
-
-    private ArrayList<SerializableMetaData> decodeMetaData(String rawData) {
-        // TODO
-    }
-
-    private TextSpan generateTextSpan(String text, ArrayList<SerializableMetaData> metaData) {
-        // TODO
     }
 }

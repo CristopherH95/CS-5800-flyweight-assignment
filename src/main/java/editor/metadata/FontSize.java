@@ -15,7 +15,7 @@ public class FontSize extends MetaData {
     }
 
     @Override
-    public String serialize() {
+    public String serializeValue() {
         return String.valueOf(point);
     }
 }

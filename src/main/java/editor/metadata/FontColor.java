@@ -16,7 +16,7 @@ public class FontColor extends MetaData {
     }
 
     @Override
-    public String serialize() {
+    public String serializeValue() {
         return color.toString();
     }
 }

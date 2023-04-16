@@ -6,13 +6,9 @@ import editor.metadata.Font;
 import java.util.HashMap;
 
 public class FontFactory {
-    private final HashMap<FontType, Font> fontMap;
+    private static final HashMap<FontType, Font> fontMap = new HashMap<>();
 
-    public FontFactory() {
-        fontMap = new HashMap<>();
-    }
-
-    public Font getFont(FontType fontType) {
+    public static Font getFont(FontType fontType) {
         if (!fontMap.containsKey(fontType)) {
             fontMap.put(fontType, new Font(fontType));
         }
